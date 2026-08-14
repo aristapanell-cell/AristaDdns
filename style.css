@@ -1,0 +1,608 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    min-height: 100vh;
+    background: #0a0e1a;
+    color: #ffffff;
+    line-height: 1.6;
+}
+
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(135deg, #0a0e1a 0%, #1a1f3a 30%, #0d1b2a 60%, #1b2838 100%);
+    background-attachment: fixed;
+}
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(10, 14, 26, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1rem 2rem;
+    backdrop-filter: blur(10px);
+}
+
+.header-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.logo-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    flex: 0 0 100%;
+    margin-bottom: 0.5rem;
+}
+
+.logo-icon {
+    height: 120px;
+    width: auto;
+    border-radius: 16px;
+    object-fit: contain;
+}
+
+.logo-section h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #60a5fa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -0.5px;
+    text-align: center;
+}
+
+.stats-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.stat-divider {
+    opacity: 0.3;
+}
+
+.stat-item {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+#totalDns {
+    font-weight: 600;
+    color: #60a5fa;
+    font-size: 1.1rem;
+}
+
+.search-section {
+    flex: 1;
+    min-width: 200px;
+    max-width: 400px;
+}
+
+#searchInput {
+    width: 100%;
+    padding: 0.7rem 1.2rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(96, 165, 250, 0.4);
+    box-shadow: 0 0 20px rgba(96, 165, 250, 0.1);
+}
+
+#searchInput::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+main {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.dashboard {
+    padding: 1.5rem 2rem;
+    margin-bottom: 2rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 16px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 1rem;
+}
+
+.dashboard-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+.dashboard-label {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 600;
+}
+
+.dashboard-value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-top: 0.2rem;
+}
+
+.filter-section {
+    padding: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.filter-btn {
+    padding: 0.5rem 1.2rem;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.filter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
+}
+
+.filter-btn.active {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.filter-btn[data-filter="all"].active {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #ffffff;
+    border-color: #6366f1;
+}
+
+.filter-btn[data-filter="Standard"].active {
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    color: #ffffff;
+    border-color: #3b82f6;
+}
+
+.filter-btn[data-filter="AdBlock"].active {
+    background: linear-gradient(135deg, #f59e0b, #fbbf24);
+    color: #ffffff;
+    border-color: #f59e0b;
+}
+
+.filter-btn[data-filter="Family"].active {
+    background: linear-gradient(135deg, #10b981, #34d399);
+    color: #ffffff;
+    border-color: #10b981;
+}
+
+.filter-btn[data-filter="Security"].active {
+    background: linear-gradient(135deg, #ef4444, #f87171);
+    color: #ffffff;
+    border-color: #ef4444;
+}
+
+.filter-btn[data-filter="Malware"].active {
+    background: linear-gradient(135deg, #dc2626, #ef4444);
+    color: #ffffff;
+    border-color: #dc2626;
+}
+
+.filter-btn[data-filter="Adult Filter"].active {
+    background: linear-gradient(135deg, #ec4899, #f472b6);
+    color: #ffffff;
+    border-color: #ec4899;
+}
+
+.filter-btn[data-filter="Unfiltered"].active {
+    background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+    color: #ffffff;
+    border-color: #8b5cf6;
+}
+
+
+.filter-btn[data-filter="Private"].active {
+    background: linear-gradient(135deg, #06b6d4, #22d3ee);
+    color: #ffffff;
+    border-color: #06b6d4;
+}
+
+.filter-btn[data-filter="IPv4"].active {
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    color: #ffffff;
+    border-color: #3b82f6;
+}
+
+.filter-btn[data-filter="IPv6"].active {
+    background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+    color: #ffffff;
+    border-color: #8b5cf6;
+}
+
+.filter-btn[data-filter="DoH"].active {
+    background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+    color: #ffffff;
+    border-color: #8b5cf6;
+}
+
+.filter-btn[data-filter="DoT"].active {
+    background: linear-gradient(135deg, #6366f1, #818cf8);
+    color: #ffffff;
+    border-color: #6366f1;
+}
+
+.filter-btn[data-filter="DNSCrypt"].active {
+    background: linear-gradient(135deg, #14b8a6, #2dd4bf);
+    color: #ffffff;
+    border-color: #14b8a6;
+}
+
+.dns-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.dns-card {
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.dns-card:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(96, 165, 250, 0.2);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+}
+
+.dns-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.dns-address {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #60a5fa;
+    word-break: break-all;
+    font-family: 'Monaco', 'Courier New', monospace;
+}
+
+.dns-status {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.7rem;
+    background: rgba(52, 211, 153, 0.15);
+    border-radius: 12px;
+    color: #34d399;
+    border: 1px solid rgba(52, 211, 153, 0.2);
+    font-weight: 500;
+}
+
+.dns-provider {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+}
+
+.dns-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.category-badge {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.7rem;
+    border-radius: 12px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dns-protocols {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    margin-bottom: 0.75rem;
+}
+
+.protocol-badge {
+    font-size: 0.7rem;
+    padding: 0.15rem 0.7rem;
+    border-radius: 12px;
+    font-weight: 500;
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dns-type {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.3);
+    margin-bottom: 0.75rem;
+}
+
+.dns-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.copy-btn {
+    padding: 0.3rem 1.2rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.copy-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+.copy-btn.copied {
+    background: rgba(52, 211, 153, 0.15);
+    color: #34d399;
+    border-color: rgba(52, 211, 153, 0.2);
+}
+
+.pagination {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+}
+
+.pagination button {
+    padding: 0.4rem 1.5rem;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+}
+
+.pagination button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+#pageInfo {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.9rem;
+}
+
+footer {
+    max-width: 1400px;
+    margin: 2rem auto 0;
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.telegram-btn {
+    display: inline-block;
+    padding: 0.8rem 2.5rem;
+    background: linear-gradient(135deg, #0088cc, #006699);
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.telegram-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0, 136, 204, 0.3);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2.5rem;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    z-index: 1000;
+    background: rgba(10, 14, 26, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+}
+
+.modal h2 {
+    margin-bottom: 0.5rem;
+    color: #ffffff;
+}
+
+.modal p {
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 1.5rem;
+}
+
+.modal button {
+    padding: 0.6rem 2.5rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.modal button:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.empty-state {
+    display: none;
+    padding: 4rem;
+    text-align: center;
+    margin: 2rem 0;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+}
+
+.empty-state h2 {
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    
+    .logo-icon {
+        height: 80px;
+    }
+    
+    .logo-section h1 {
+        font-size: 1.6rem;
+        text-align: center;
+    }
+    
+    .logo-section {
+        justify-content: center;
+    }
+    
+    .stats-section {
+        justify-content: center;
+        font-size: 0.8rem;
+    }
+    
+    .search-section {
+        max-width: 100%;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 0.5rem;
+    }
+    
+    .dashboard-value {
+        font-size: 1.4rem;
+    }
+    
+    .dns-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-section {
+        padding: 0.75rem;
+        gap: 0.4rem;
+    }
+    
+    .filter-btn {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.8rem;
+    }
+    
+    main {
+        padding: 1rem;
+    }
+    
+    header {
+        padding: 0.8rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .dns-card {
+        padding: 1rem;
+    }
+    
+    .dns-address {
+        font-size: 0.95rem;
+    }
+    
+    .pagination {
+        flex-wrap: wrap;
+    }
+}
