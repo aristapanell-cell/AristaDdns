@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arista DNS Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-container"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="assets/logo.png" alt="Arista Logo" class="logo-icon">
+                <h1>Arista DNS Hub</h1>
+            </div>
+            <div class="stats-section">
+                <span class="stat-item" id="totalDns">0</span>
+                <span class="stat-divider">|</span>
+                <span class="stat-item">Last Updated: <span id="lastUpdated">Loading...</span></span>
+            </div>
+            <div class="search-section">
+                <input type="text" id="searchInput" placeholder="Search DNS, Provider, Category..." aria-label="Search DNS">
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="dashboard">
+            <div class="dashboard-grid">
+                <div class="dashboard-item">
+                    <span class="dashboard-label">Total</span>
+                    <span class="dashboard-value" id="dashTotal">0</span>
+                </div>
+                <div class="dashboard-item">
+                    <span class="dashboard-label">IPv4</span>
+                    <span class="dashboard-value" id="dashIPv4">0</span>
+                </div>
+                <div class="dashboard-item">
+                    <span class="dashboard-label">IPv6</span>
+                    <span class="dashboard-value" id="dashIPv6">0</span>
+                </div>
+                <div class="dashboard-item">
+                    <span class="dashboard-label">DoH</span>
+                    <span class="dashboard-value" id="dashDoH">0</span>
+                </div>
+                <div class="dashboard-item">
+                    <span class="dashboard-label">DoT</span>
+                    <span class="dashboard-value" id="dashDoT">0</span>
+                </div>
+                <div class="dashboard-item">
+                    <span class="dashboard-label">AdBlock</span>
+                    <span class="dashboard-value" id="dashAdBlock">0</span>
+                </div>
+                <div class="dashboard-item">
+                    <span class="dashboard-label">Family</span>
+                    <span class="dashboard-value" id="dashFamily">0</span>
+                </div>
+                <div class="dashboard-item">
+                    <span class="dashboard-label">Security</span>
+                    <span class="dashboard-value" id="dashSecurity">0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="filter-section">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="Standard">Standard</button>
+            <button class="filter-btn" data-filter="AdBlock">AdBlock</button>
+            <button class="filter-btn" data-filter="Family">Family</button>
+            <button class="filter-btn" data-filter="Security">Security</button>
+            <button class="filter-btn" data-filter="Malware">Malware</button>
+            <button class="filter-btn" data-filter="Adult Filter">Adult Filter</button>
+            <button class="filter-btn" data-filter="Unfiltered">Unfiltered</button>
+            <button class="filter-btn" data-filter="FreeShekan">FreeShekan</button>
+            <button class="filter-btn" data-filter="Private">Private</button>
+            <button class="filter-btn" data-filter="IPv4">IPv4</button>
+            <button class="filter-btn" data-filter="IPv6">IPv6</button>
+            <button class="filter-btn" data-filter="DoH">DoH</button>
+            <button class="filter-btn" data-filter="DoT">DoT</button>
+            <button class="filter-btn" data-filter="DNSCrypt">DNSCrypt</button>
+        </div>
+        
+        <div id="dnsContainer" class="dns-grid"></div>
+        
+        <div class="pagination" id="pagination">
+            <button id="prevPage" disabled>Previous</button>
+            <span id="pageInfo">Page 1 of 1</span>
+            <button id="nextPage" disabled>Next</button>
+        </div>
+    </main>
+    
+    <footer>
+        <a href="https://t.me/aristapanel" target="_blank" class="telegram-btn">
+            Join us on Telegram
+        </a>
+    </footer>
+    
+    <div id="errorModal" class="modal">
+        <h2>Unable to Load DNS Data</h2>
+        <p>Please check your connection and try again.</p>
+        <button id="retryBtn">Retry</button>
+    </div>
+    
+    <div id="emptyState" class="empty-state" style="display: none;">
+        <h2>No DNS Found</h2>
+        <p>Try adjusting your search or filter criteria.</p>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
